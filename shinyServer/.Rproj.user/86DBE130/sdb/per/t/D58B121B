@@ -1,0 +1,16 @@
+{
+    "contents" : "\n# This is the server logic for a Shiny web application.\n# You can find out more about building applications with Shiny here:\n#\n# http://shiny.rstudio.com\n#\n\nlibrary(shiny)\nlibrary(dplyr)\n\n\nshinyServer(function(input, output) {\n  source('stock.R', local = TRUE)\n  output$dashboard <- renderTable({\n    report\n  })\n  \n\n})\n",
+    "created" : 1432612471544.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "3985589812",
+    "id" : "D58B121B",
+    "lastKnownWriteTime" : 1432612785,
+    "path" : "~/Desktop/peel/exercises/portfolio/shinyServer/server.R",
+    "project_path" : "server.R",
+    "properties" : {
+    },
+    "source_on_save" : false,
+    "type" : "r_source"
+}

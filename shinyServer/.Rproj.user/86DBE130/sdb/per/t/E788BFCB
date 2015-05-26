@@ -1,0 +1,16 @@
+{
+    "contents" : "library(quantmod)\n\n## Transaction History  \ntransaction <- read.table('transaction_history.csv', sep = ',', header = TRUE, stringsAsFactors = TRUE)\n\n## Report\n\n\n## Average Transaction Price\nattach(transaction)\npr_by <- by(data = transaction, list(Ticker), #simplify = FALSE, \n   FUN = function(x){\n      sum(x$Cost * x$Shares)/sum(x$Shares)\n   })\npr <- as.numeric(pr_by)\nnames(pr) <- attributes(pr_by)$dimnames[[1]]\npr <- pr[order(names(pr))]\nreport <- round(pr, 2)\n\n## Last Closing Price\ngetLastClosingPrice <- function(ticker){\n   a <- getSymbols(ticker, src = \"yahoo\", ## warning\n       from = Sys.Date() - 10,\n       to = Sys.Date(),\n       auto.assign = FALSE)\n   as.numeric(a[nrow(a), 4])\n}\n\ncl <- sapply(levels(transaction$Ticker), FUN = getLastClosingPrice)\ncl <- cl[order(names(cl))]\nreport <- rbind(report, round(cl, 2))\n\n\n## Growth Rate up to date\npercentage <- paste0(round((cl - pr) / pr * 100, 2), '%')\nnames(percentage) <- names(cl)\nreport <- rbind(report, percentage)\n\n\n## Portion by total market value\npr_by <- by(data = transaction, list(Ticker), #simplify = FALSE, \n            FUN = function(x){\n              sum(x$Cost * x$Shares)\n            })\npr <- as.numeric(pr_by)\nnames(pr) <- attributes(pr_by)$dimnames[[1]]\npr <- pr[order(names(pr))]\npr1 <- pr/sum(pr)\npr1 <- paste0(round(pr1 * 100, 0), '%')\nreport <- rbind(report, pr1)\n# MUB       VEA       VTI       VWO \n# 0.4285549 0.1670508 0.2888531 0.1155412\n\n## Report bullet point tag\nrownames(report) <- c('Cost Price',\n                      'MKT Value',\n                      'Growth Rate',\n                      'Proportion')\n\n\n\n\n\n# chartSeries(data, type = 'candlesticks')\n\n\n\n###############################################################################\n##                                                                           \n##                                              \n##\n###############################################################################\n",
+    "created" : 1432612906595.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "2845270233",
+    "id" : "E788BFCB",
+    "lastKnownWriteTime" : 1432613654,
+    "path" : "~/Desktop/peel/exercises/portfolio/shinyServer/stock.R",
+    "project_path" : "stock.R",
+    "properties" : {
+    },
+    "source_on_save" : false,
+    "type" : "r_source"
+}

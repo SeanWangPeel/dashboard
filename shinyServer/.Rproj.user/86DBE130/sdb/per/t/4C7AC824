@@ -1,0 +1,16 @@
+{
+    "contents" : "library(shiny)\n\nshinyUI(fluidPage(\n  titlePanel('My Portfolio'),\n  tableOutput('dashboard')\n  \n))\n",
+    "created" : 1432612471477.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "775294038",
+    "id" : "4C7AC824",
+    "lastKnownWriteTime" : 1432612878,
+    "path" : "~/Desktop/peel/exercises/portfolio/shinyServer/ui.R",
+    "project_path" : "ui.R",
+    "properties" : {
+    },
+    "source_on_save" : false,
+    "type" : "r_source"
+}
